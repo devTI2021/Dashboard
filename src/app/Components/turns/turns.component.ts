@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
+interface Uses {
+  value: number;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-turns',
@@ -20,7 +24,13 @@ export class TurnsComponent implements OnInit {
     financed: new FormControl(false)
   });
   emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
-
+  foods: Uses[] = [
+    {value: 0, viewValue: 'Primer vehiculo'},
+    {value: 1, viewValue: 'Vehiculo familiar'},
+    {value: 2, viewValue: 'Vehiculo trabajo'},
+    {value: 3, viewValue: 'Renovacion vehiculo'},
+    {value: 4, viewValue: 'Vehiculo usado'},
+  ];
   constructor() { }
 
   ngOnInit(): void {
