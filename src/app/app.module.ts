@@ -11,11 +11,18 @@ import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginTurnsComponent } from './Components/login-turns/login-turns.component';
+import {MatTableModule} from '@angular/material/table'; 
+import {MatDialogModule} from '@angular/material/dialog'; 
+import {DialogContentExampleDialog} from './Components/turns/turns.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TurnsComponent
+    TurnsComponent,
+    LoginTurnsComponent,
+    DialogContentExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -27,6 +34,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatButtonModule,
     MatCheckboxModule,
     MatSelectModule,
+    HttpClientModule,
+    MatTableModule,
+    MatDialogModule,
     BrowserAnimationsModule
   ],
   providers: [],

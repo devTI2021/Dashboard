@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>Creacion de cliente</h2>
+<mat-dialog-content >
+    <form [formGroup]="Form" (ngSubmit)="closeDialog()">
+                    
+
+        <mat-form-field class="form-field" appearance="outline">
+            <mat-label> Nombre </mat-label>
+            <input matInput formControlName="firstName" >
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+            <mat-label> Apellidos </mat-label>
+            <input matInput formControlName="lastName" >
+            
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+            <mat-label> Celular </mat-label>
+            <input matInput formControlName="cellphone" >
+        
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+            <mat-label> Correo </mat-label>
+        <input matInput formControlName="email" >
+        
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Vehiculo de interes</mat-label>
+            <mat-select formControlName="vh">
+                <mat-option *ngFor="let vh of vehicles" [value]="vh.vh_familia">
+                {{vh.descripcion}}
+                </mat-option>
+            </mat-select>
+        
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+            <mat-label> Uso de vehiculo </mat-label>
+            <mat-select formControlName="use_vh" name="food">
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+                </mat-option>
+            </mat-select>
+        
+        </mat-form-field>
+
+        <section  class="example-section">
+            <mat-checkbox formControlName="retoma">Retoma</mat-checkbox>
+        </section>
+
+        <section  class="example-section">
+            <mat-checkbox formControlName="financed">Financiado</mat-checkbox>
+        </section>
+
+        <div class="div-action">
+            <button mat-button mat-dialog-close>Cancelar</button> 
+            <button mat-button type="submit" >Confirmar</button>
+        </div>
+        
+
+    </form> 
+</mat-dialog-content>
+
+
+
+
+<!-- Copyright 2022 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at https://angular.io/license -->
