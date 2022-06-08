@@ -1,0 +1,54 @@
+<mat-card>
+
+    <mat-card-title> PANEL DE TURNOS</mat-card-title>
+    <mat-card-subtitle>
+        En esta seccion se visualizara el estado de turnos de los asesores comerciales para la atencion de clientes en vitrina 
+    </mat-card-subtitle>
+    <mat-card-content>
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+        
+            
+                  <!-- Weight Column -->
+            <ng-container matColumnDef="Estado turno">
+                <th mat-header-cell *matHeaderCellDef>Estado turno  </th>
+                <td mat-cell *matCellDef="let element">
+                    <span>
+                        <!-- <mat-icon [ngClass]="element.state=='D' ? 'icon-avaliable' : 'icon-busy'" >{{ element.state=="D" ? "check_circle" : ( element.state=="L" ? "warning" : "error")}}</mat-icon> -->
+                        <mat-icon *ngIf="element?.state === 'E'" class="icon-avaliable">check_circle </mat-icon>
+                        <mat-icon *ngIf="element?.state === 'R'" class="icon-busy">cancel_presentation </mat-icon>
+                        <mat-icon *ngIf="element?.state === 'C'" class="icon-busy">clear </mat-icon>
+                        <mat-icon *ngIf="element?.state === 'T'" class="icon-finsh">done_all </mat-icon>
+                        <mat-icon *ngIf="element?.state === 'I'" class="icon-info">info </mat-icon>
+                        {{ element.descripcion}}
+                    </span>
+
+                </td>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="Asesor">
+              <th mat-header-cell *matHeaderCellDef> Asesor </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="Cliente">
+              <th mat-header-cell *matHeaderCellDef> Cliente </th>
+              <td mat-cell *matCellDef="let element"> {{element.cliente}} </td>
+            </ng-container>
+        
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+    </mat-card-content>
+
+</mat-card>
+
+  
+  

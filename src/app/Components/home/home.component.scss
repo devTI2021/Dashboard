@@ -1,0 +1,68 @@
+body{
+    background-color: #787878;
+}
+
+.toolbar{
+    position: sticky;
+
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+
+    top: 0; /* Sets the sticky toolbar to be on top */
+
+    z-index: 1000;
+}
+
+.example-container{
+    height: 100%;
+}
+
+mat-drawer{
+    width: 20%;
+    background-color: black;
+    
+}
+
+.Hearder-title{
+    color: white;
+}
+
+
+mat-expansion-panel{
+
+    mat-expansion-panel-header mat-panel-description{
+        color: black;
+    }
+
+    mat-expansion-panel-header mat-icon{
+        color: black;
+    }
+}
+
+
+@media only screen and (max-width: 415px) {
+    mat-drawer{
+        width: 50%; 
+    }  
+}
+
+
+.toolbar{
+    background-color: black;
+
+    button{
+        color:  white;
+        background-color: black;
+    }
+}
+
+.menu{
+    margin-left: auto;
+}
+
+mat-panel-title {
+    flex-basis: 0;
+}
+
+  mat-panel-description {
+    flex-basis: 100%;
+}

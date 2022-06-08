@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Rango de fechas</h2>
+<mat-dialog-content >
+
+    <form [formGroup]="Form" (ngSubmit)="closeDialog()">
+
+        <mat-form-field class="form-field"  appearance="fill">
+            <mat-label>Fecha inicial</mat-label>
+            <input matInput  formControlName="datein" [matDatepicker]="picker" [max]="date" [min]="minDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    
+        <mat-form-field class="form-field"  appearance="fill">
+            <mat-label>Fecha final</mat-label>
+            <input matInput formControlName="dateout" [matDatepicker]="pick" [max]="date" [min]="minDate">
+            <mat-datepicker-toggle matSuffix [for]="pick"></mat-datepicker-toggle>
+            <mat-datepicker #pick></mat-datepicker>
+        </mat-form-field>
+    
+        <div class="div-action">
+            <button mat-button mat-dialog-close>Cancelar</button> 
+            <button mat-button type="submit" >Confirmar</button>
+        </div>
+
+    </form>
+    
+
+</mat-dialog-content>

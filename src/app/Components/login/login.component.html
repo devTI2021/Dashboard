@@ -1,0 +1,35 @@
+
+<div class="form-wraper">
+  <div class="form-container card">
+      
+    <h4 class="form-title">Bienvenido!</h4>
+
+    <form [formGroup]="Form" (ngSubmit)="Login()" class="form-body">
+
+      <mat-form-field class="justifier" appearance="outline">
+          <input matInput placeholder="Usuario" text="Usuario" formControlName="user">
+          <mat-icon matSuffix>supervised_user_circle</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="justifier" appearance="outline">
+          <input matInput placeholder="Contraseña" text="Contraseña" type="password"  formControlName="password">
+          <mat-icon matSuffix>lock</mat-icon>
+      </mat-form-field>
+      
+      <div class="additional-link">
+        <a routerLink="/signup"><strong>Olvidaste tu Contraseña?</strong></a>
+      </div>
+      
+      <button mat-raised-button class="btn custom-btn"> 
+          <mat-icon>input</mat-icon> Iniciar sesion
+      </button>
+
+    </form>
+  
+    <div class="form-header">
+      <img src="assets/Logo.png"  class="main-lock-icon" alt="">
+    </div>
+
+      
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>Visitas de vitrina</h2>
+<mat-dialog-content>
+
+    <form [formGroup]="Form" (ngSubmit)="Submit()">
+
+        <mat-form-field class="form-field"  appearance="fill">
+            <mat-label>Fecha inicial</mat-label>
+            <input matInput  formControlName="datein" [matDatepicker]="picker" [max]="date" [min]="minDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    
+        <mat-form-field class="form-field"  appearance="fill">
+            <mat-label>Fecha final</mat-label>
+            <input matInput formControlName="dateout" [matDatepicker]="pick" [max]="date" [min]="minDate">
+            <mat-datepicker-toggle matSuffix [for]="pick"></mat-datepicker-toggle>
+            <mat-datepicker #pick></mat-datepicker>
+        </mat-form-field>
+
+        <button mat-stroked-button type="submit">Buscar</button>
+
+    </form>
+
+    <ng-container *ngIf="dataSource.data.length>0">
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+
+            <ng-container matColumnDef="Mes">
+                <th mat-header-cell *matHeaderCellDef> Mes </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.month}}
+                </td>
+            </ng-container>
+            
+                  <!-- Weight Column -->
+            <ng-container matColumnDef="Dia">
+                <th mat-header-cell *matHeaderCellDef>Dia  </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.day}}
+                </td>
+            </ng-container>
+    
+            <!-- Position Column -->
+            <ng-container matColumnDef="Visitas">
+              <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+              <td mat-cell *matCellDef="let element"> {{element.count}} </td>
+            </ng-container>
+          
+        
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </ng-container>
+    
+
+
+
+</mat-dialog-content>

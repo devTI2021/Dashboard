@@ -1,7 +1,24 @@
 <h2 mat-dialog-title>Creacion de cliente</h2>
 <mat-dialog-content >
     <form [formGroup]="Form" (ngSubmit)="closeDialog()">
-                    
+             
+        <mat-form-field class="form-field" appearance="outline">
+            <mat-label>No. Documento </mat-label>
+            <input matInput formControlName="id" (change)="FindPerson()">
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Tipo de documento</mat-label>
+            <mat-select formControlName="type_id" >
+                <mat-option value="C">Cedula </mat-option>
+                <mat-option value="N">Nit </mat-option>
+                <mat-option value="E">Extranjeria </mat-option>
+                <mat-option value="T">Tarjeta identidad </mat-option>
+                <mat-option value="P">Pasaporte </mat-option>
+                <mat-option value="O">Otro </mat-option>
+            </mat-select>
+        
+        </mat-form-field>
 
         <mat-form-field class="form-field" appearance="outline">
             <mat-label> Nombre </mat-label>
@@ -43,6 +60,30 @@
                 {{food.viewValue}}
                 </mat-option>
             </mat-select>
+        
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+            <mat-label> Tipo de vehiculo </mat-label>
+            <mat-select formControlName="type_vh" name="food">
+                <mat-option value=0>Camioneta</mat-option>
+                <mat-option value=1>Automovil</mat-option>
+            </mat-select>
+        
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+            <mat-label> Plan de venta </mat-label>
+            <mat-select formControlName="plan_vh" name="food">
+                <mat-option value=0>Nuevo</mat-option>
+                <mat-option value=1>Usado</mat-option>
+            </mat-select>
+        
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Comentarios</mat-label>
+            <textarea matInput formControlName="obs" placeholder="Comentarios..." maxlength="200"></textarea>
         
         </mat-form-field>
 

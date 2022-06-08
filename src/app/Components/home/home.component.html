@@ -1,0 +1,96 @@
+
+
+<mat-toolbar class="toolbar">
+  <!-- ============================================================== -->
+  <!-- Logo - style you can find in header.scss -->
+  <!-- ============================================================== -->
+  
+  <!-- ============================================================== -->
+  <!-- sidebar toggle -->
+  <!-- ============================================================== -->
+  
+  <button mat-mini-fab (click)="drawer.toggle()" value="sidebarclosed">
+      <mat-icon>menu</mat-icon>
+  </button>
+  <span fxFlex></span>
+  
+  <h2 class="Hearder-title">Automarcali</h2>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+
+      <button mat-menu-item >
+        <span>{{user.name}}</span>
+      </button>
+
+      <button mat-menu-item [matMenuTriggerFor]="states" *ngIf="user.group=='CIALVEH'">
+        <mat-icon>person_pin</mat-icon>
+        <span>Estado</span>
+      </button>
+      
+
+      <button mat-menu-item (click)="closeSession()">
+        <mat-icon>settings_power</mat-icon>
+        <span>Cerrar sesion</span>
+      </button>
+
+    </mat-menu>
+
+    <mat-menu #states="matMenu">
+      <button mat-menu-item (click)="ChangeState('E')" >Espera</button>
+      <button mat-menu-item (click)="ChangeState('O')">Ocupado</button>
+    </mat-menu>
+
+
+  <!-- ============================================================== -->
+  <!-- app header component - style you can find in header.scss / header.component.ts-->
+  <!-- ============================================================== -->
+  >
+</mat-toolbar>
+
+<mat-drawer-container class="example-container" >
+  <mat-drawer #drawer mode="push" class="test">
+
+
+    <mat-accordion >
+      
+      <ng-container *ngFor="let item of menuItems" >
+
+        <mat-expansion-panel *ngIf="item.child!= undefined && item.child.length>0"  class="mat-elevation-z0" [hideToggle]="item.child === undefined">
+
+
+          <mat-expansion-panel-header >
+            
+            <mat-panel-description> {{ item.text }} </mat-panel-description>
+
+          </mat-expansion-panel-header>
+      
+          
+            
+            <mat-nav-list *ngFor="let submenu of item.child">
+
+              <mat-list-item  *ngIf="submenu.acces ==1"  [routerLink]="submenu.link">
+                {{ submenu.text}}
+                <mat-divider></mat-divider>
+              </mat-list-item>
+            
+            </mat-nav-list>
+          
+        
+        </mat-expansion-panel>
+      </ng-container>
+    </mat-accordion>
+
+    
+
+  </mat-drawer>
+  <mat-drawer-content>
+
+
+    <router-outlet ></router-outlet>
+
+    </mat-drawer-content>
+</mat-drawer-container>
+  

@@ -1,7 +1,9 @@
 <mat-card>
+    <mat-card-title>Registro de visitas</mat-card-title>
+    <mat-card-subtitle>En esta seccion se registrara la visita de clientes</mat-card-subtitle>
     <mat-card-content>
         
-        <form [formGroup]="visit" (ngSubmit)="openDialog()">
+        <form [formGroup]="visit" (ngSubmit)="openDialog()" *ngIf="hideForm==1">
             
             <mat-form-field appearance="outline">
                 <mat-label>Motivo de visita</mat-label>
@@ -14,119 +16,62 @@
             </mat-form-field>   
             
             <button mat-stroked-button type="submit">Registrar visita</button>
-
+            
         </form> 
 
-        <table mat-table [dataSource]="turns.getData()" class="mat-elevation-z8">
+        
+        <button mat-stroked-button class="btn-download" *ngIf="hideVisit" (click)="Download()">Descargar visitas</button>
+        <button mat-stroked-button class="btn-download-left" *ngIf="hideVisit" (click)="NumVisits()">Visualizar visitas</button>
 
-            <ng-container matColumnDef="Posicion">
-                <th mat-header-cell *matHeaderCellDef> Posicion. </th>
-                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-            </ng-container>
+        
 
-            <ng-container matColumnDef="Nombre">
-                <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-            </ng-container>
+        <ng-container *ngIf="dataSource.data.length>0">
 
-            <ng-container matColumnDef="Estado">
-                <th mat-header-cell *matHeaderCellDef> Estado de turno </th>
-                <td mat-cell *matCellDef="let element" [ngStyle]="{'color':element.state === 'D' ? 'green' : 'red' }"> {{element.state=='D' ? 'Disponible' : (element.state=='L' ? 'Ocupado' : 'Ausente')}} </td>
-            </ng-container>
+            <div class="div-action example-button-row">
+                <button mat-icon-button (click)="Download()" aria-label="Descargar informacion en csv">
+                    <mat-icon>download</mat-icon>
+                </button>
+    
+                <button mat-icon-button (click)="GetVist()" aria-label="Actualizar informacion">
+                    <mat-icon>update</mat-icon>
+                </button>
+            </div>
+              
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+    
+                <ng-container matColumnDef="Customer">
+                    <th mat-header-cell *matHeaderCellDef>Cliente</th>
+                    <td mat-cell *matCellDef="let element"> {{element.customer}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Adviser">
+                    <th mat-header-cell *matHeaderCellDef>Asesor comercial</th>
+                    <td mat-cell *matCellDef="let element"> {{element.seller}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Fecha">
+                    <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Nit cliente">
+                    <th mat-header-cell *matHeaderCellDef>Nit cliente</th>
+                    <td mat-cell *matCellDef="let element"> {{element.nit}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Accion">
+                    <th mat-header-cell *matHeaderCellDef>Accion</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-button (click)="refreshTurns(element.id_turno,element.nit)">Solicitar turno</button>
+                    </td>
+                </ng-container>
 
-            <ng-container matColumnDef="Hora registro">
-                <th mat-header-cell *matHeaderCellDef> Hora registro </th>
-                <td mat-cell *matCellDef="let element"> {{element.date }} </td>
-            </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-           <!--  <div class="col"> 
-                <form [formGroup]="Form" class="container">
-                    
-                    <mat-form-field class="form-field" appearance="outline">
-                        <mat-label>Motivo de visita</mat-label>
-                        <mat-select formControlName="motive">
-                            <mat-option *ngFor="let mot of motive" [value]="mot.value">
-                            {{mot.viewValue}}
-                            </mat-option>
-                        </mat-select>
-                    
-                    </mat-form-field>
-
-                    <mat-form-field class="form-field" appearance="outline">
-                    <mat-label> Nombre </mat-label>
-                    <input matInput formControlName="firstName" >
-                    
-                    </mat-form-field>
-
-                    <mat-form-field class="form-field" appearance="outline">
-                        <mat-label> Apellidos </mat-label>
-                        <input matInput formControlName="lastName" >
-                        
-                    </mat-form-field>
-
-                    <mat-form-field class="form-field" appearance="outline">
-                        <mat-label> Celular </mat-label>
-                        <input matInput formControlName="cellphone" >
-                    
-                    </mat-form-field>
-
-                    <mat-form-field class="form-field" appearance="outline">
-                        <mat-label> Correo </mat-label>
-                    <input matInput formControlName="email" >
-                    
-                    </mat-form-field>
-
-                    <mat-form-field class="form-field" appearance="outline">
-                        <mat-label>Vehiculo de interes</mat-label>
-                        <mat-select formControlName="vh">
-                            <mat-option *ngFor="let vh of vehicles" [value]="vh.vh_familia">
-                            {{vh.descripcion}}
-                            </mat-option>
-                        </mat-select>
-                    
-                    </mat-form-field>
-
-                    <mat-form-field class="form-field" appearance="outline">
-                        <mat-label> Uso de vehiculo </mat-label>
-                        <mat-select formControlName="use_vh" name="food">
-                            <mat-option *ngFor="let food of foods" [value]="food.value">
-                            {{food.viewValue}}
-                            </mat-option>
-                        </mat-select>
-                    
-                    </mat-form-field>
-
-                    <section  class="example-section">
-                        <mat-checkbox formControlName="retoma">Retoma</mat-checkbox>
-                    </section>
-
-                    <section  class="example-section">
-                        <mat-checkbox formControlName="financed">Financiado</mat-checkbox>
-                    </section>
-
-                    <button mat-raised-button color="primary" type="submit">Asingar turno</button>
-                    
-                </form> 
-            </div> -->
-
-            <!-- <div class="col"> 
-                <div class="list-card">
-                    <mat-card *ngFor="let item of turns.getData(); index as i" class="cardContainer">
-                        <mat-card-header>
-                            <div mat-card-avatar class="example-header-image"></div>
-                            <mat-card-title>{{item.name}}</mat-card-title>
-                            <mat-card-subtitle>Asesor comercial</mat-card-subtitle>
-                        </mat-card-header>
-                        <mat-card-content>Estado: Disponible</mat-card-content>
-
-                    </mat-card>
-
-                    
-                </div>
-            </div> -->
+        </ng-container>
+        
         
     </mat-card-content>
 </mat-card>
